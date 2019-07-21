@@ -25,6 +25,7 @@ object ScalaImapSsl {
         count = count + 1
         if (count > limit) System.exit(0)
         println(message.getSubject())
+        println(message.getHeader("List-Unsubscribe"))
       }
       inbox.close(true)
     } catch {
