@@ -19,13 +19,15 @@ object ScalaImapSsl {
       
       // limit this to 20 message during testing
       val messages = inbox.getMessages()
-      val limit = 200
+      val limit = 20
       var count = 0
       for (message <- messages) {
         count = count + 1
         if (count > limit) System.exit(0)
         println(message.getSubject())
-        println(message.getHeader("List-Unsubscribe"))
+        if (message.getHeader("List-Unsubscribe") != null) {
+          println(message.getHeader("List-Unsubscribe").mkString)
+        }
       }
       inbox.close(true)
     } catch {
