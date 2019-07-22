@@ -6,7 +6,7 @@ Run
 
 Adapt settings in `.envrc` and import them to shell (I use [direnv](https://direnv.net/), but `source`ing should also work).
 
-	scala -cp javax.mail.jar client.scala
+	scala client.scala
 
 Documentation
 -------------
