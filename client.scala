@@ -11,17 +11,16 @@ object ScalaImapSsl {
     val session = Session.getDefaultInstance(props, null)
     val store = session.getStore("imaps")
     try {
-      // use imap.gmail.com for gmail
       store.connect(sys.env("IMAP_SERVER"),
                     sys.env("IMAP_ACCOUNT"), sys.env("IMAP_PASSWORD"))
       val inbox = store.getFolder("Inbox")
+
       val processed_box = store.getFolder("Processed")
       if (!processed_box.exists()) {
         processed_box.create(Folder.HOLDS_MESSAGES)
         processed_box.setSubscribed(true);
       }
       
-      // limit this to 20 message during testing
       inbox.open(Folder.READ_ONLY)
       val messages = inbox.getMessages()
       val limit = 20
